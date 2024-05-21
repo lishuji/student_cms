@@ -133,11 +133,11 @@
 <script src="{{asset('js/lay-config.js')}}" charset="utf-8"></script>
 <script>
     layui.use(['jquery', 'layer', 'miniAdmin'], function () {
-        var $ = layui.jquery,
+        const $ = layui.jquery,
             layer = layui.layer,
             miniAdmin = layui.miniAdmin;
 
-        var options = {
+        const options = {
             iniUrl: "{{route('init')}}",    // 初始化接口
             clearUrl: "{{route('clear')}}", // 缓存清理接口
             urlHashLocation: false,      // 是否打开hash定位

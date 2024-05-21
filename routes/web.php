@@ -14,21 +14,26 @@
 
 // 需要登录
 // 这里部分用数组的写法,因为,数组的写法比@的写法有个好处是,ide可以识别到,可以点击直接跳转到对应方法
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\InitController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+
 Route::middleware('auth')->group(
     function () {
         // 权限相关
 //        Route::get('/per/create', [\App\Http\Controllers\PermissionController::class, 'create']);
 //        Route::get('/per/index', [\App\Http\Controllers\PermissionController::class, 'index']);
         // 初始化
-        Route::get('/init', [\App\Http\Controllers\InitController::class, 'systemInit'])->name('init');
-        Route::get('/clear', [\App\Http\Controllers\InitController::class, 'clear'])->name('clear');
+        Route::get('/init', [InitController::class, 'systemInit'])->name('init');
+        Route::get('/clear', [InitController::class, 'clear'])->name('clear');
         //首页
-        Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
-        Route::get('/welcome', [\App\Http\Controllers\IndexController::class, 'welcome'])->name('welcome');
-        Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+        Route::get('/', [IndexController::class, 'index'])->name('index');
+        Route::get('/welcome', [IndexController::class, 'welcome'])->name('welcome');
+        Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
         // 个人信息
-        Route::get('/info', [\App\Http\Controllers\UserController::class, 'info'])->name('user.info');
+        Route::get('/info', [UserController::class, 'info'])->name('user.info');
         // 学生
         Route::resource('/user', 'UserController');
         Route::post('/getuser', 'UserController@getUser')->name('getuser');
